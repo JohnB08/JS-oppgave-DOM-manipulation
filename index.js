@@ -40,11 +40,12 @@ for (i = 0; i < nav.length; i++) {
   btn.textContent = nav[i];
   navBar.appendChild(btn);
   btn.className = "btn";
-  btn.style.width = "25%";
   btn.style.borderTop = "0.1em solid grey";
   btn.style.borderBottom = "0.65em solid black";
   btn.style.borderRadius = "2em";
   btn.style.backgroundColor = "white";
+  btn.style.width = "100%";
+  btn.style.cursor = "pointer";
   btn.style.transition = "250ms ease-in-out";
   btn.addEventListener("mouseover", (event) => {
     btn.style.borderBottom = "0.35em solid black";
@@ -72,3 +73,29 @@ img.style.width = "100%";
 img.innerHTML =
   '<img src="./img/forest_trees_autumn.jpg" alt="Autumn trees!" style="width: 100%">';
 main.appendChild(img);
+function smallScreen(width) {
+  if (width.matches) {
+    document.body.style.gridTemplateColumns = "1fr 75% 0fr";
+    navBar.style.flexDirection = "column";
+    header.style.gridArea = "1/1/3/2";
+    main.style.gridArea = "1/2/3/3";
+    headText.style.gridArea = "1/1/2/2";
+    navBar.style.gridArea = "2/1/3/2";
+    header.style.gridTemplateRows = "10% 1fr";
+    header.style.gridTemplateColumns = "1fr";
+  } else {
+    document.body.style.gridTemplateColumns = "1fr 75% 1fr";
+    navBar.style.flexDirection = "row";
+    header.style.gridArea = "1/1/2/4";
+    main.style.gridArea = "2/2/3/3";
+    headText.style.gridArea = "1/1/2/2";
+    navBar.style.gridArea = "2/1/3/2";
+    header.style.gridTemplateRows = "1fr 1fr";
+    header.style.gridTemplateColumns = "1fr";
+  }
+}
+let width = window.matchMedia("(max-width: 600px)");
+smallScreen(width);
+window.addEventListener("resize ", () => {
+  smallScreen(width);
+});
